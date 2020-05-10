@@ -1,0 +1,5 @@
+/.idea
+/.env
+/src/node_modules
+/services/nginx/sites-available/default.conf
+/services/php-fpm/etc/php/php.ini

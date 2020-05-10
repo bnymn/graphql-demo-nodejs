@@ -1,0 +1,8 @@
+version: '3'
+services:
+  nodejs:
+    build:
+      context: ./services/node
+    tty: true
+    volumes:
+      - ./src:/app

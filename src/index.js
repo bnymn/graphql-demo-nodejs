@@ -21,12 +21,16 @@ type Product {
 }
 `);
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
 function get_product() {
     return {
-        "id": Math.random(),
-        "name": Math.random(),
-        "price": Math.random(),
-        "sku": Math.random(),
+        "id": getRandomInt(5000000),
+        "name": getRandomInt(5000000),
+        "price": getRandomInt(5000000),
+        "sku": getRandomInt(5000000),
     }
 }
 
@@ -48,10 +52,10 @@ let root = {
 };
 
 let app = express();
-app.use('/graphql', graphqlHTTP({
+app.use('/', graphqlHTTP({
   schema: schema,
   rootValue: root,
   graphiql: true,
 }));
 app.listen(8080);
-console.log('Running a GraphQL API server at http://localhost:8080/graphql');
+console.log('Running a GraphQL API server at http://localhost:8080/');

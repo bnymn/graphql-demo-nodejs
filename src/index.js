@@ -35,7 +35,7 @@ function get_product() {
 }
 
 let products = [];
-for (i=0; i<1000; i++) {
+for (i=0; i<10000; i++) {
     let product = get_product()
     product["related_products"] = []
     for (k=0; k<4; k++) {

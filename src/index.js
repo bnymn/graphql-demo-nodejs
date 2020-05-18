@@ -1,24 +1,5 @@
 var express = require('express');
 
-// Construct a schema, using GraphQL schema language
-var schema = buildSchema(`
-schema {
-    query: Query
-}
-  
-type Query {
-    products: [Product]
-}
-
-type Product {
-    id: Int
-    name: String
-    price: Int
-    sku: String
-    related_products: [Product]
-}
-`);
-
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }

@@ -1,6 +1,4 @@
 var express = require('express');
-var graphqlHTTP = require('express-graphql');
-var { buildSchema } = require('graphql');
 
 // Construct a schema, using GraphQL schema language
 var schema = buildSchema(`
@@ -47,18 +45,12 @@ function get_products(size) {
     return products
 }
 
-// The root provides a resolver function for each API endpoint
-let root = {
-    products: (root, args, context, info) => {
-        return get_products(args.query.size)
-    },
-};
-
 let app = express();
-app.use('/', graphqlHTTP({
-  schema: schema,
-  rootValue: root,
-  graphiql: true,
-}));
+app.get('/', async function (req, res) {
+    let size = req.query.size
+    let products = get_products(size)
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(products));
+});
 app.listen(8080);
 console.log('Running a GraphQL API server at http://localhost:8080/');

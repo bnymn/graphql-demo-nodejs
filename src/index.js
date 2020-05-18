@@ -34,20 +34,23 @@ function get_product() {
     }
 }
 
-let products = [];
-for (i=0; i<10000; i++) {
-    let product = get_product()
-    product["related_products"] = []
-    for (k=0; k<4; k++) {
-        product["related_products"].push(get_product())
+function get_products(size) {
+    let products = []
+    for (i=0; i<size; i++) {
+        let product = get_product()
+        product["related_products"] = []
+        for (k=0; k<4; k++) {
+            product["related_products"].push(get_product())
+        }
+        products.push(product)
     }
-    products.push(product)
+    return products
 }
 
 // The root provides a resolver function for each API endpoint
 let root = {
-    products: () => {
-        return products
+    products: (root, args, context, info) => {
+        return get_products(args.query.size)
     },
 };
 
